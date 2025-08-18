@@ -26,5 +26,6 @@ export const {
   forgetPassword,
   resetPassword,
   organization,
-  updateUser
+  updateUser,
+  useActiveOrganization
 } = authClient

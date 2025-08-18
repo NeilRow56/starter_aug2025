@@ -7,6 +7,7 @@ import { organization } from 'better-auth/plugins'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { nextCookies } from 'better-auth/next-js'
 import { Resend } from 'resend'
+import { getActiveOrganization } from '@/server/organizations'
 
 const resend = new Resend(process.env.RESEND_API_KEY as string)
 
@@ -39,6 +40,21 @@ export const auth = betterAuth({
       })
     },
     requireEmailVerification: true
+  },
+  databaseHooks: {
+    session: {
+      create: {
+        before: async session => {
+          const organization = await getActiveOrganization(session.userId)
+          return {
+            data: {
+              ...session,
+              activeOrganizationId: organization?.id
+            }
+          }
+        }
+      }
+    }
   },
   session: {
     expiresIn: 30 * 24 * 60 * 60, // 30 days - default is 7 days
