@@ -3,6 +3,7 @@ import VerifyEmail from '@/components/emails/verify-email'
 import { db } from '@/db'
 import { schema } from '@/db/schema'
 import { betterAuth } from 'better-auth'
+import { organization } from 'better-auth/plugins'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { nextCookies } from 'better-auth/next-js'
 import { Resend } from 'resend'
@@ -55,5 +56,5 @@ export const auth = betterAuth({
       // session, user and verification table names already match the database names
     }
   }),
-  plugins: [nextCookies()]
+  plugins: [organization(), nextCookies()]
 })
