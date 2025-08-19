@@ -6,6 +6,7 @@ import { betterAuth } from 'better-auth'
 import { organization } from 'better-auth/plugins'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { nextCookies } from 'better-auth/next-js'
+import { ac, admin, member, owner } from './auth/permissions'
 import { Resend } from 'resend'
 import { getActiveOrganization } from '@/server/organizations'
 
@@ -72,5 +73,15 @@ export const auth = betterAuth({
       // session, user and verification table names already match the database names
     }
   }),
-  plugins: [organization(), nextCookies()]
+  plugins: [
+    organization({
+      ac,
+      roles: {
+        owner,
+        admin,
+        member
+      }
+    }),
+    nextCookies()
+  ]
 })

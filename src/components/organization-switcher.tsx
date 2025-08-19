@@ -46,7 +46,7 @@ export function OrganizationSwitcher({
       value={activeOrganization?.id}
     >
       <SelectTrigger className='w-[280px]'>
-        <SelectValue placeholder='Theme' />
+        <SelectValue placeholder='Select' />
       </SelectTrigger>
       <SelectContent>
         {organizations.map(organization => (
