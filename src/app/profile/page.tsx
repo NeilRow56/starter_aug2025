@@ -11,7 +11,7 @@ export default async function Page() {
     headers: await headers()
   })
 
-  if (!session) redirect('/auth/login')
+  if (!session) redirect('/auth/sign-in')
 
   return (
     <div className='container mx-auto max-w-screen-lg space-y-8 px-8 py-16'>
